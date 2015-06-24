@@ -1,0 +1,50 @@
+{
+    "name": "grunt-font-store",
+    "version": "0.1.0",
+    "description": "A Grunt task based on https://github.com/CrocoDillon/font-store",
+    "main": "index.js",
+    "scripts": {
+        "clean": "rm -rf node_modules",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "echo \"Error: no start specified\" && exit 1",
+        "git-init": "git init && cd .git/hooks && ln -s ../../bin/git/commit-msg.js && mv commit-msg.js commit-msg && cd ../../"
+    },
+    "engines": {
+        "node": ">=0.12.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sixertoy/grunt-font-store"
+    },
+    "keywords": [
+        "grunt"
+    ],
+    "author": [{
+        "name": "sixertoy",
+        "email": "sixertoy.github@gmail.com"
+    }],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/sixertoy/grunt-font-store/issues"
+    },
+    "homepage": "https://github.com/sixertoy/grunt-font-store",
+    "dependencies": {
+        "class-extend": "",
+        "lodash": "",
+        "object-assign": ""
+    },
+    "devDependencies": {
+        "grunt": "",
+        "grunt-bump": "",
+        "grunt-contrib-connect": "",
+        "grunt-contrib-jshint": "",
+        "grunt-contrib-watch": "",
+        "grunt-coveralls": "",
+        "grunt-jasmine-node-coverage": "",
+        "grunt-jsbeautifier": "",
+        "grunt-markdown": "",
+        "grunt-wrap": "",
+        "load-grunt-config": "",
+        "sinon": ""
+    }
+}

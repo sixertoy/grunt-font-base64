@@ -1,0 +1,12 @@
+tests:
+  - jasmine_node
+build:
+  - wrap
+  - jsbeautifier
+compile:
+  - tests
+  - build
+  - jshint
+default:
+  - compile
+  - watch
