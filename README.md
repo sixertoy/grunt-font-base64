@@ -1,12 +1,25 @@
-# grunt-font-store
+# grunt-font-store [![Built with Grunt][grunt-img]](http://gruntjs.com/)
 
-[![Built with Grunt][grunt-img]](http://gruntjs.com/) [![MIT License][license-img]][license-url]
+[![MIT License][license-img]][license-url] [![NPM version][npm-version-img]][npm-url] [![NPM downloads][npm-downloads-img]][npm-url]
 
-* A Grunt task based on https://github.com/CrocoDillon/font-store
+* A Grunt task based on [font-store](https://github.com/CrocoDillon/font-store)
 
 ## Install
 
+```bash
+npm i grunt-font-store --save-dev
+```
+
 ## Usage
+```bash
+options:{
+    format: 'woff'
+}
+dest: {},
+files: []
+```
+
+## Options
 
 ## Issues
 
@@ -14,8 +27,6 @@
 [license-img]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
 [license-url]: LICENSE-MIT
 
-[coverall-url]: https://coveralls.io/r/sixertoy/grunt-font-store
-[coverall-img]: https://img.shields.io/coveralls/sixertoy/grunt-font-store.svg?style=flat-square
-
-[travis-url]: https://travis-ci.org/sixertoy/grunt-font-store
-[travis-img]: http://img.shields.io/travis/sixertoy/grunt-font-store.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/grunt-font-store
+[npm-version-img]: http://img.shields.io/npm/v/grunt-font-store.svg?style=flat-square
+[npm-downloads-img]: http://img.shields.io/npm/dm/grunt-font-store.svg?style=flat-square
