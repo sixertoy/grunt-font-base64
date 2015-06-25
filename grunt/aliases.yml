@@ -1,3 +1,4 @@
 default:
   - jshint
+  - jasmine_node
   - font_store

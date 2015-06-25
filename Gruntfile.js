@@ -12,5 +12,5 @@ module.exports = function (grunt) {
     'use strict';
     // load configs
     require('load-grunt-config')(grunt);
-    grunt.loadTasks('tasks');
+    grunt.loadTasks('tasks/font-store');
 };

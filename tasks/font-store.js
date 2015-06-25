@@ -16,59 +16,104 @@
 (function () {
     'use strict';
 
-    var path = require('path'),
-        lodash = require('lodash'),
-        // FontStore = require('font-store/lib/fontStore'),
+    // variables
+    var GOOGLE_API_HOST = 'fonts.googleapis.com',
+        VALID_PROTOCOL = ['http:', 'https:'],
+        VALID_FORMAT = ['woff', 'woff2'],
+        // requires
+        URL = require('url'),
+        Path = require('path'),
+        Grunt = require('grunt'),
+        Lodash = require('lodash'),
 
+        /**
+         *
+         * Methodes utilitaires
+         *
+         */
         utils = {
-            validString: function (grunt, value) {
-                return lodash.isString(value) && !lodash.isEmpty(value);
+            isValidPath: function (value) {
+                if (arguments.length < 1 || Lodash.isEmpty(value) || !Lodash.isString(value)) {
+                    throw new Error('options.dest needs 1 argument');
+                }
+                return Path.normalize(value);
             },
-            validArray: function (grunt, value) {
-                return lodash.isArray(value);
+            isValidFormat: function (value) {
+                if (arguments.length < 1 || Lodash.isEmpty(value) || !Lodash.isString(value)) {
+                    throw new Error('options.format needs 1 argument');
+                }
+                return (VALID_FORMAT.indexOf(value.toLocaleLowerCase()) !== -1);
             },
-            normalizePath: function (options) {
-                options.input = path.normalize(options.input);
-                options.output = path.normalize(options.output);
-                options.layout = path.normalize(options.layout);
+            isValidURL: function (value) {
+                var parsed;
+                if (arguments.length < 1 || Lodash.isEmpty(value) || !Lodash.isString(value)) {
+                    throw new Error('options.files needs 1 argument');
+                }
+                parsed = URL.parse(value, true, true);
+                return (parsed.slashes &&
+                    parsed.hostname === GOOGLE_API_HOST &&
+                    parsed.pathname.indexOf('css') !== -1 &&
+                    parsed.query.hasOwnProperty('family') &&
+                    VALID_PROTOCOL.indexOf(parsed.protocol) !== -1 &&
+                    (Lodash.isString(parsed.query.family) && !Lodash.isEmpty(parsed.query.family))
+                );
+            },
+            toAbsolute: function (value, base) {
+                base = Path.normalize(base);
+                value = Path.normalize(value);
+                //
+                if (!Path.isAbsolute(value)) {
+                    value = Path.join(base, value);
+                }
+                return value;
             }
-        };
-    utils = null;
-
-    /**
-     *
-     *
-     *
-     */
-    module.exports = function (grunt) {
-        grunt.registerMultiTask('font_store', 'Based on font-store@npm', function () {
-
-            var done = this.async(),
+        },
+        /**
+         *
+         * Grunt task entry point
+         *
+         */
+        render = function () {
+            var isValidFormat, isValidPath, options,
+                done = this.async(),
                 cwd = process.cwd();
-            /*
-            console.log(this);
-            console.log(this.dest);
-            console.log(this.filesSrc);
-            */
-
             this.options({
                 dest: cwd,
                 format: 'woff', // woff2
-                debug: (grunt.option('debug') === 1)
+                debug: (Grunt.option('debug') === 1)
             });
+            options = this.options();
+            // verification du format
+            isValidPath = utils.isValidPath(options.dest);
+            isValidFormat = utils.isValidFormat(options.format);
+            //
+            if (!isValidPath) {
+                Grunt.log.error('options.dest is not valid');
 
-            console.log(this.filesSrc);
+            } else if (!isValidFormat) {
+                Grunt.log.error('options.format is not valid');
 
-            this.filesSrc.filter(function(){
-                return true;
-            }).map(function(){
-                console.log(arguments);
-            });
-
+            } else {
+                // options.dest = utils.toAbsolute(options.dest, cwd);
+                //
+                this.filesSrc.filter(function (url) {
+                    return utils.isValidURL(url);
+                }).map(function () {
+                    // console.log(arguments);
+                });
+            }
             done();
+        };
 
-        });
+    /**
+     *
+     * Exports
+     *
+     */
+    module.exports = function (grunt) {
+        grunt.registerMultiTask('font_store', 'Based on font-store@npm', render);
     };
+    module.exports.utils = utils;
 }());
 
 /*

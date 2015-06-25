@@ -5,5 +5,5 @@ module.exports = {
         dest: 'yo',
         format: 'woff'
     },
-    files: ['Gruntfile.js', 'tests/**/*.js', 'tasks/**/*.js']
+    files: ['Gruntfile.js', 'http://fonts.googleapis.com/css?family=Dosis']
 };

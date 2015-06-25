@@ -1,9 +1,12 @@
 /*jslint indent: 4 */
 /*global module */
+// print: 'summary', // none, summary, detail, both
 module.exports = {
     options: {
         match: '.',
-        coverage: {},
+        coverage: {
+            print: 'summary'
+        },
         matchAll: false,
         forceExit: true,
         extensions: 'js',
@@ -18,5 +21,7 @@ module.exports = {
             savePath: './build/reports/jasmine/'
         }
     },
-    src: ['app/**/*.js']
+    all: {
+        src: ['tasks/**/*.js']
+    }
 };
