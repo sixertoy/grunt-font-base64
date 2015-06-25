@@ -21,9 +21,9 @@
         VALID_PROTOCOL = ['http:', 'https:'],
         VALID_FORMAT = ['woff', 'woff2'],
         // requires
+        grunt,
         URL = require('url'),
         Path = require('path'),
-        Grunt = require('grunt'),
         Lodash = require('lodash'),
 
         /**
@@ -68,39 +68,36 @@
                 return value;
             }
         },
-        /**
-         *
-         * Grunt task entry point
-         *
-         */
         render = function () {
-            var isValidFormat, isValidPath, options,
+            
+            var isValidFormat, isValidPath,
                 done = this.async(),
-                cwd = process.cwd();
-            this.options({
-                dest: cwd,
-                format: 'woff', // woff2
-                debug: (Grunt.option('debug') === 1)
-            });
-            options = this.options();
-            // verification du format
+                cwd = process.cwd(),
+                options = this.options({
+                    dest: cwd,
+                    files: [],
+                    format: 'woff', // woff2
+                    debug: (grunt.option('debug') === 1)
+                });
+            
             isValidPath = utils.isValidPath(options.dest);
             isValidFormat = utils.isValidFormat(options.format);
-            //
+            
             if (!isValidPath) {
-                Grunt.log.error('options.dest is not valid');
+                grunt.log.error('options.dest is not valid');
 
             } else if (!isValidFormat) {
-                Grunt.log.error('options.format is not valid');
+                grunt.log.error('options.format is not valid');
 
             } else {
-                // options.dest = utils.toAbsolute(options.dest, cwd);
-                //
-                this.filesSrc.filter(function (url) {
+                options.dest = utils.toAbsolute(options.dest, cwd);
+                
+                options.files.filter(function(url){
                     return utils.isValidURL(url);
-                }).map(function () {
-                    // console.log(arguments);
+                }).map(function (url) {
+                    
                 });
+                
             }
             done();
         };
@@ -111,7 +108,7 @@
      *
      */
     module.exports = function (grunt) {
-        grunt.registerMultiTask('font_store', 'Based on font-store@npm', render);
+        grunt.registerTask('font_store', 'Based on font-store@npm', render.apply(this));
     };
     module.exports.utils = utils;
 }());
