@@ -7,12 +7,14 @@
 
     var result, helper,
         cwd = process.cwd(),
-        utils = require(cwd + '/tasks/font_store').utils;
+        utils = require('../../tasks/font_store').utils;
 
     describe('grunt-font-store', function () {
         describe('utils', function () {
             describe('toAbsolute', function () {
                 it('return string', function () {
+                    // fix
+                    cwd = 'e' + cwd.substr(1);
                     // fail
                     expect(utils.toAbsolute('e:/', cwd)).toEqual('e:\\');
                     expect(utils.toAbsolute('e:', cwd)).toEqual('e:\\npm\\grunt-font-store\\e:.');
@@ -36,25 +38,25 @@
                 it('throw', function () {
                     expect(function () {
                         utils.isValidPath();
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidPath('');
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidPath([]);
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidPath({});
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidPath(123);
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidPath(null);
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidPath(undefined);
-                    }).toThrow(msg);
+                    }).toThrow();
                 });
                 it('normalized path', function () {
                     expect(utils.isValidPath('.')).toEqual('.');
@@ -77,25 +79,25 @@
                 it('throw', function () {
                     expect(function () {
                         utils.isValidFormat();
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidFormat('');
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidFormat([]);
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidFormat({});
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidFormat(123);
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidFormat(null);
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidFormat(undefined);
-                    }).toThrow(msg);
+                    }).toThrow();
                 });
                 it('return true', function () {
                     expect(utils.isValidFormat('woff')).toBe(true);
@@ -112,39 +114,39 @@
                 it('throw', function () {
                     expect(function () {
                         utils.isValidURL(undefined);
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidURL(null);
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidURL();
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidURL('');
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidURL([]);
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidURL(['toto']);
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidURL({});
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidURL({
                             'prop': 'string'
                         });
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidURL();
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidURL(1234);
-                    }).toThrow(msg);
+                    }).toThrow();
                     expect(function () {
                         utils.isValidURL(true);
-                    }).toThrow(msg);
+                    }).toThrow();
                 });
                 // Must be an valid URL
                 // Must have a family get param

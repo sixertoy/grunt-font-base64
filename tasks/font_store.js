@@ -12,7 +12,7 @@
  *
  */
 /*jslint indent: 4, nomen:true */
-/*globals module, require, process */
+/*globals module, require */
 (function () {
     'use strict';
 
@@ -21,7 +21,6 @@
         VALID_PROTOCOL = ['http:', 'https:'],
         VALID_FORMAT = ['woff', 'woff2'],
         // requires
-        grunt,
         URL = require('url'),
         Path = require('path'),
         Lodash = require('lodash'),
@@ -67,9 +66,9 @@
                 }
                 return value;
             }
-        },
-        render = function () {
-            
+        };
+            /*
+    var render = function () {
             var isValidFormat, isValidPath,
                 done = this.async(),
                 cwd = process.cwd(),
@@ -100,7 +99,8 @@
                 
             }
             done();
-        };
+    };
+            */
 
     /**
      *
@@ -108,9 +108,13 @@
      *
      */
     module.exports = function (grunt) {
-        grunt.registerTask('font_store', 'Based on font-store@npm', render.apply(this));
+        // render = null;
+        grunt.registerTask('font_store', 'Based on font-store@npm', function () {
+            console.log(arguments);
+        });
     };
     module.exports.utils = utils;
+    
 }());
 
 /*

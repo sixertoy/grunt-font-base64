@@ -1,4 +1,5 @@
 default:
   - jshint
-  - jasmine_node
+  - jasmine_nodejs
+  - coverage
   - font_store
