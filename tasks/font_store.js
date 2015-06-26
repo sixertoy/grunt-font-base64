@@ -58,6 +58,7 @@
                 );
             },
             toAbsolute: function (value, base) {
+                // var path = ();
                 base = Path.normalize(base);
                 value = Path.normalize(value);
                 //
@@ -78,10 +79,10 @@
                     format: 'woff', // woff2
                     debug: (grunt.option('debug') === 1)
                 });
-            
+
             isValidPath = utils.isValidPath(options.dest);
             isValidFormat = utils.isValidFormat(options.format);
-            
+
             if (!isValidPath) {
                 grunt.log.error('options.dest is not valid');
 
@@ -90,13 +91,13 @@
 
             } else {
                 options.dest = utils.toAbsolute(options.dest, cwd);
-                
+
                 options.files.filter(function(url){
                     return utils.isValidURL(url);
                 }).map(function (url) {
-                    
+
                 });
-                
+
             }
             done();
     };
@@ -114,7 +115,7 @@
         });
     };
     module.exports.utils = utils;
-    
+
 }());
 
 /*

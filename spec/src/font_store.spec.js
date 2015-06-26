@@ -12,7 +12,7 @@
     describe('grunt-font-store', function () {
         describe('utils', function () {
             describe('toAbsolute', function () {
-                it('return string', function () {
+                xit('return string', function () {
                     // fix
                     cwd = 'e' + cwd.substr(1);
                     // fail
@@ -35,7 +35,7 @@
             });
             describe('isValidPath', function () {
                 var msg = 'options.dest needs 1 argument';
-                it('throw', function () {
+                xit('throw', function () {
                     expect(function () {
                         utils.isValidPath();
                     }).toThrow();
@@ -58,7 +58,7 @@
                         utils.isValidPath(undefined);
                     }).toThrow();
                 });
-                it('normalized path', function () {
+                xit('normalized path', function () {
                     expect(utils.isValidPath('.')).toEqual('.');
                     expect(utils.isValidPath('./')).toEqual('.\\');
                     expect(utils.isValidPath('toto')).toEqual('toto');
