@@ -3,7 +3,7 @@
 module.exports = {
     options: {},
     tests: {
-        files: ['./tests/specs/**/*.spec.js', './tasks/font-store/**/*.js'],
+        files: ['./spec/src/**/*.spec.js', './tasks/font-store/**/*.js'],
         tasks:['jshint', 'jasmine_nodejs']
     }
 };

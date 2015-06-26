@@ -33,4 +33,3 @@ module.exports = {
         specs: ["spec/src/*"]
     }
 };
-//istanbul cover jasmine-node tests/ --verbose && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
