@@ -7,6 +7,7 @@
 
     var result, helper,
         cwd = process.cwd(),
+        path = require('path'),
         utils = require('../../tasks/font_store').utils;
 
     describe('grunt-font-store', function () {
@@ -17,7 +18,7 @@
                     cwd = 'e' + cwd.substr(1);
                     // fail
                     expect(utils.toAbsolute('e:/', cwd)).toEqual('e:\\');
-                    expect(utils.toAbsolute('e:', cwd)).toEqual('e:\\npm\\grunt-font-store\\e:.');
+                    expect(utils.toAbsolute('e:', cwd)).toEqual(cwd + 'e:.');
                     //
                     expect(utils.toAbsolute('e:/npm', cwd)).toEqual('e:\\npm');
                     expect(utils.toAbsolute('e:/utils/toto', cwd)).toEqual('e:\\utils\\toto');
@@ -35,7 +36,7 @@
             });
             describe('isValidPath', function () {
                 var msg = 'options.dest needs 1 argument';
-                xit('throw', function () {
+                it('throw', function () {
                     expect(function () {
                         utils.isValidPath();
                     }).toThrow();
@@ -58,7 +59,7 @@
                         utils.isValidPath(undefined);
                     }).toThrow();
                 });
-                xit('normalized path', function () {
+                it('normalized path', function () {
                     expect(utils.isValidPath('.')).toEqual('.');
                     expect(utils.isValidPath('./')).toEqual('.\\');
                     expect(utils.isValidPath('toto')).toEqual('toto');

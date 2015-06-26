@@ -58,7 +58,6 @@
                 );
             },
             toAbsolute: function (value, base) {
-                // var path = ();
                 base = Path.normalize(base);
                 value = Path.normalize(value);
                 //
