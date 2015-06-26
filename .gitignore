@@ -202,3 +202,6 @@ bower_components/
 
 build/
 dist/
+
+# specifics
+!/bin/jasmine_node

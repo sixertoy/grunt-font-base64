@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "clean_modules": "rm -rf node_modules",
-    "preinstall": "npm install -g istanbul jasmine-node",
+    "preinstall": "npm install -g istanbul",
     "start": "echo \"Error: no start specified\" && exit 1",
-    "test": "jasmine-node spec/src --color --junitreport --output build/reports --verbose"
+    "test": "istanbul cover ./bin/jasmine_node spec/src"
   },
   "engines": {
     "node": ">=0.12.0"
@@ -41,6 +41,7 @@
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-jasmine-nodejs": "^1.4.0",
+    "jasmine-node": "^1.14.5",
     "load-grunt-config": "^0.17.1",
     "sinon": "^1.15.3"
   }
