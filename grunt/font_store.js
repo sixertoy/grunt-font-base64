@@ -4,7 +4,7 @@ module.exports = {
     options: {
         format: 'woff'
     },
-    task: {
-        files: ['Gruntfile.js', 'http://fonts.googleapis.com/css?family=Dosis']
+    all: {
+        fonts: ['Gruntfile.js', 'http://fonts.googleapis.com/css?family=Open+Sans', 'http://fonts.googleapis.com/css?family=Droid+sans']
     }
 };

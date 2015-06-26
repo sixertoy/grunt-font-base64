@@ -24,6 +24,7 @@
         URL = require('url'),
         Path = require('path'),
         Lodash = require('lodash'),
+        FontStore = require('font-store/lib/fontStore'),
 
         /**
          *
@@ -67,14 +68,21 @@
                 return value;
             }
         };
-            /*
-    var render = function () {
+    /**
+     *
+     * Exports
+     *
+     */
+    module.exports = function (grunt) {
+
+        // render = null;
+        grunt.registerMultiTask('font_store', 'Based on font-store@npm', function () {
             var isValidFormat, isValidPath,
+                promises = [],
                 done = this.async(),
                 cwd = process.cwd(),
                 options = this.options({
                     dest: cwd,
-                    files: [],
                     format: 'woff', // woff2
                     debug: (grunt.option('debug') === 1)
                 });
@@ -89,28 +97,38 @@
                 grunt.log.error('options.format is not valid');
 
             } else {
-                options.dest = utils.toAbsolute(options.dest, cwd);
 
-                options.files.filter(function(url){
+                options.dest = utils.toAbsolute(options.dest, cwd);
+                this.data.fonts.filter(function (url) {
                     return utils.isValidURL(url);
                 }).map(function (url) {
-
+                    promises.push(url);
                 });
 
+                promises.forEach(function (url, index) {
+
+                    console.log(url);
+
+                    FontStore(url, {
+                        format: options.format
+                    }, function (err, fileName, json) {
+
+                        console.log(json);
+
+                        if (err) {
+                            console.log('Oops. An error occurred:', err.message);
+                        } else {
+                            console.log('Conversion successful!');
+                            console.log(fileName);
+                        }
+                        if ((index + 1) >= promises.length) {
+                            // done();
+                        }
+                    });
+                });
             }
             done();
-    };
-            */
 
-    /**
-     *
-     * Exports
-     *
-     */
-    module.exports = function (grunt) {
-        // render = null;
-        grunt.registerTask('font_store', 'Based on font-store@npm', function () {
-            console.log(arguments);
         });
     };
     module.exports.utils = utils;
@@ -141,7 +159,6 @@ fontStore(url, options, function(err, fileName, json) {
     process.exit(1);
   }
 
-  console.log('Conversion successful!');
   console.log('The file ' + fileName + ' contains the converted fonts.');
 });
 */
