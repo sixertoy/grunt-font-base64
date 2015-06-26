@@ -21,6 +21,7 @@
         VALID_PROTOCOL = ['http:', 'https:'],
         VALID_FORMAT = ['woff', 'woff2'],
         // requires
+        FS = require('fs'),
         URL = require('url'),
         Path = require('path'),
         Lodash = require('lodash'),
@@ -77,13 +78,15 @@
 
         // render = null;
         grunt.registerMultiTask('font_store', 'Based on font-store@npm', function () {
-            var isValidFormat, isValidPath,
+
+            var isValidFormat, isValidPath, name,
                 promises = [],
+                embedded = '',
                 done = this.async(),
                 cwd = process.cwd(),
                 options = this.options({
-                    dest: cwd,
                     format: 'woff', // woff2
+                    dest: Path.join(cwd, 'fonts.css'),
                     debug: (grunt.option('debug') === 1)
                 });
 
@@ -97,8 +100,14 @@
                 grunt.log.error('options.format is not valid');
 
             } else {
-
+                // check if is file
+                // dossier de sortie du css
                 options.dest = utils.toAbsolute(options.dest, cwd);
+
+                if (FS.existsSync(options.dest)) {
+                    FS.unlinkSync(options.dest);
+                }
+
                 this.data.fonts.filter(function (url) {
                     return utils.isValidURL(url);
                 }).map(function (url) {
@@ -106,59 +115,42 @@
                 });
 
                 promises.forEach(function (url, index) {
+                    try{
+                        FontStore(url, {
+                            format: options.format
+                        }, function (err, fileName, json) {
 
-                    console.log(url);
+                            console.log(index);
+                            console.log(err);
 
-                    FontStore(url, {
-                        format: options.format
-                    }, function (err, fileName, json) {
+                            if (err) {
+                                // grunt.log.error('An error occurred:', err.message);
 
-                        console.log(json);
+                            } else {
+                                grunt.log.debug('Conversion successful! ' + fileName);
+                                embedded += json.value;
+                                console.log(embedded);
 
-                        if (err) {
-                            console.log('Oops. An error occurred:', err.message);
-                        } else {
-                            console.log('Conversion successful!');
-                            console.log(fileName);
-                        }
-                        if ((index + 1) >= promises.length) {
-                            // done();
-                        }
-                    });
+                            }
+                            if ((index + 1) === promises.length) {
+                                // @create utils.concatfile method
+                                /*
+                                FS.writeFile(options.dest, embedded, function () {
+                                    grunt.log.debug(options.dest + ' has been created.');
+                                });
+                                */
+                                console.log(embedded);
+                                console.log('done');
+                                done();
+                            }
+                        });
+                    } catch(e){
+                        console.log(e);
+                    }
                 });
             }
-            done();
-
         });
     };
     module.exports.utils = utils;
 
 }());
-
-/*
-var argv = yargs
-      .usage(package.description + '\nUsage: font-store [OPTIONS]... [LINK]...')
-      .help('help').alias('help', 'h')
-      .showHelpOnFail(false, 'Specify --help for usage and available options')
-      .version(package.version, 'version').alias('version', 'V')
-      .demand(1)
-      .options('format', {
-        alias: 'f',
-        description: 'Expected font format, either "woff" or "woff2".',
-        default: 'woff'
-      })
-      .argv,
-    url = argv._[0],
-    options = {
-      format: argv.format
-    };
-
-fontStore(url, options, function(err, fileName, json) {
-  if (err) {
-    console.log('Oops. An error occurred:', err.message);
-    process.exit(1);
-  }
-
-  console.log('The file ' + fileName + ' contains the converted fonts.');
-});
-*/
