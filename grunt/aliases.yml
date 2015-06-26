@@ -1,7 +1,7 @@
 tests:
   - jshint
-  - jasmine_nodejs
+  - jasmine_node
 default:
   - jshint
-  - jasmine_nodejs
+  - jasmine_node
   - font_store
