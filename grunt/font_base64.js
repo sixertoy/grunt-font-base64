@@ -5,6 +5,6 @@ module.exports = {
         format: 'woff'
     },
     all: {
-        fonts: ['Gruntfile.js', 'http://fonts.googleapis.com/css?family=Open+Sans', 'http://fonts.googleapis.com/css?family=Droid+sans']
+        fonts: ['Gruntfile.js', 'http://fonts.googleapis.com/css?family=Droid+Sans:700', 'http://fonts.googleapis.com/css?family=Droid+Sans', 'http://fonts.googleapis.com/css?family=Open+Sans', 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700']
     }
 };

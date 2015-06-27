@@ -12,7 +12,7 @@
  *
  */
 /*jslint indent: 4, nomen:true */
-/*globals module, require */
+/*globals module, require, process */
 (function () {
     'use strict';
 
@@ -26,6 +26,7 @@
         Path = require('path'),
         Lodash = require('lodash'),
         fontOptim = require('fontoptim'),
+        Google = require('./services/google'),
 
         /**
          *
@@ -116,51 +117,19 @@
                 this.data.fonts.filter(function (url) {
                     return utils.isValidURL(url);
                 }).map(function (url) {
-                    promises.push(url);
+                    Google.add(url);
                 });
 
-                // iterates trough valid url
-                promises.forEach(function (url, index) {
-                    console.log(url);
-                });
-                /*
-                var formatsCss = fontoptim(fonts, options);
-
-                // Save CSS
-                for (var format in formatsCss) {
-                    var filename = this.data.dest + '.' + format + '.css';
-                    grunt.file.write(filename, formatsCss[format]);
-                    grunt.log.writeln('File ' + filename.cyan + ' created.');
-                }
-                */
-                /*
-                promises.forEach(function (url, index) {
-                    try {
-                        FontStore(url, {
-                            format: options.format
-                        }, function (err, fileName, json) {
-
-                            console.log(index);
-                            console.log(err);
-
-                            if (err) {
-                                // grunt.log.error('An error occurred:', err.message);
-
-                            } else {
-                                grunt.log.debug('Conversion successful! ' + fileName);
-                                embedded += json.value;
-                                console.log(embedded);
-
-                            }
-                            if ((index + 1) === promises.length) {
-                                // @create utils.concatfile method
-                                done();
-                            }
+                Google.start(function (err, data) {
+                    if (err) {
+                        err.forEach(function (msg) {
+                            grunt.log.error(msg);
                         });
-                    } catch (e) {
-                        console.log(e);
                     }
-                    */
+                    if (data) {
+                        // console.log(data);
+                    }
+                    done();
                 });
             }
         });

@@ -31,9 +31,11 @@
   },
   "homepage": "https://github.com/sixertoy/grunt-font-base64",
   "dependencies": {
+    "cssparser": "^0.2.2",
     "fontoptim": "^0.1.0",
     "lodash": "^3.9.3",
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "request": "^2.58.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -41,6 +43,7 @@
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-jasmine-node": "^0.3.1",
+    "grunt-local-googlefont": "^0.2.0",
     "istanbul": "^0.3.16",
     "jasmine-node": "^1.14.5",
     "load-grunt-config": "^0.17.1",

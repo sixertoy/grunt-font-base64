@@ -1,4 +1,4 @@
-# grunt-font-store [![Built with Grunt][grunt-img]](http://gruntjs.com/)
+# grunt-font-base64 [![Built with Grunt][grunt-img]](http://gruntjs.com/)
 
 [![MIT License][license-img]][license-url] [![NPM version][npm-version-img]][npm-url] [![NPM downloads][npm-downloads-img]][npm-url] [![Build][travis-img]][travis-url]
 
@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-npm i grunt-font-store --save-dev
+npm i grunt-font-base64 --save-dev
 ```
 
 ## Usage
