@@ -138,7 +138,7 @@
                                 }
                                 result.push({
                                     src: src,
-                                    data: body,
+                                    data: JSON.stringify(obj),
                                     dest: filename + Path.extname(src)
                                 });
                             } else {
@@ -151,10 +151,6 @@
                 }
                 cb(err, result);
             });
-        },
-
-        end: function(){
-
         },
 
         /**

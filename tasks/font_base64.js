@@ -127,7 +127,7 @@
                         });
                     }
                     if (data) {
-                        // console.log(data);
+                        console.log(data);
                     }
                     done();
                 });
