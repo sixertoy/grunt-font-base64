@@ -1,7 +1,6 @@
 /**
  *
- * Config for grunt-jasmine-nodejs
- * https://github.com/onury/grunt-jasmine-nodejs
+ * Config for grunt-jasmine-node
  *
  */
 /*jslint indent:4 */

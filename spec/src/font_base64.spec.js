@@ -8,7 +8,7 @@
     var result, helper,
         cwd = process.cwd(),
         path = require('path'),
-        utils = require('../../tasks/font_store').utils;
+        utils = require('../../tasks/font_base64').utils;
 
     describe('grunt-font-store', function () {
         describe('utils', function () {

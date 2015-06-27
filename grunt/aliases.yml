@@ -4,4 +4,4 @@ tests:
 default:
   - jshint
   - jasmine_node
-  - font_store
+  - font_base64

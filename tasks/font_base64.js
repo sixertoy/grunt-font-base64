@@ -1,8 +1,8 @@
 /**
  *
  *
- * grunt-joli-markdown
- * https://github.com/malas/grunt-joli-markdown
+ * grunt-font-base64
+ * https://github.com/malas/grunt-font-base64
  *
  * Copyright (c) 2015 sixertoy
  * Licensed under the MIT license.
@@ -25,7 +25,7 @@
         URL = require('url'),
         Path = require('path'),
         Lodash = require('lodash'),
-        FontStore = require('font-store/lib/fontStore'),
+        fontOptim = require('fontoptim'),
 
         /**
          *
@@ -77,7 +77,7 @@
     module.exports = function (grunt) {
 
         // render = null;
-        grunt.registerMultiTask('font_store', 'Based on font-store@npm', function () {
+        grunt.registerMultiTask('font_base64', 'Generates CSS files with WOFF(2) fonts embedded as Base64', function () {
 
             var isValidFormat, isValidPath, name,
                 promises = [],
@@ -103,19 +103,39 @@
                 // check if is file
                 // dossier de sortie du css
                 options.dest = utils.toAbsolute(options.dest, cwd);
-
+                // supp du dossier de sortie if exists
                 if (FS.existsSync(options.dest)) {
                     FS.unlinkSync(options.dest);
                 }
-
+                // filtre sur les URL de la config
+                // matching:
+                // - contains fonts.googleapis.com
+                // - contains /css
+                // - contains ?family
+                // ...
                 this.data.fonts.filter(function (url) {
                     return utils.isValidURL(url);
                 }).map(function (url) {
                     promises.push(url);
                 });
 
+                // iterates trough valid url
                 promises.forEach(function (url, index) {
-                    try{
+                    console.log(url);
+                });
+                /*
+                var formatsCss = fontoptim(fonts, options);
+
+                // Save CSS
+                for (var format in formatsCss) {
+                    var filename = this.data.dest + '.' + format + '.css';
+                    grunt.file.write(filename, formatsCss[format]);
+                    grunt.log.writeln('File ' + filename.cyan + ' created.');
+                }
+                */
+                /*
+                promises.forEach(function (url, index) {
+                    try {
                         FontStore(url, {
                             format: options.format
                         }, function (err, fileName, json) {
@@ -134,19 +154,13 @@
                             }
                             if ((index + 1) === promises.length) {
                                 // @create utils.concatfile method
-                                /*
-                                FS.writeFile(options.dest, embedded, function () {
-                                    grunt.log.debug(options.dest + ' has been created.');
-                                });
-                                */
-                                console.log(embedded);
-                                console.log('done');
                                 done();
                             }
                         });
-                    } catch(e){
+                    } catch (e) {
                         console.log(e);
                     }
+                    */
                 });
             }
         });

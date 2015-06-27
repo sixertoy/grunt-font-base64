@@ -1,6 +1,6 @@
 /**
- * grunt-font-store
- * https://github.com/sixertoy/grunt-font-store
+ * grunt-font-base64
+ * https://github.com/sixertoy/grunt-font-base64
  *
  * Copyright (c) 2015 sixertoy
  * Licensed under the MIT license.

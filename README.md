@@ -2,7 +2,7 @@
 
 [![MIT License][license-img]][license-url] [![NPM version][npm-version-img]][npm-url] [![NPM downloads][npm-downloads-img]][npm-url]
 
-* A Grunt task based on [font-store](https://github.com/CrocoDillon/font-store)
+* A Grunt task based on fontoptim
 
 ## Install
 
@@ -15,7 +15,6 @@ npm i grunt-font-store --save-dev
 options:{
     format: 'woff'
 }
-dest: {},
 files: []
 ```
 
@@ -27,6 +26,6 @@ files: []
 [license-img]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
 [license-url]: LICENSE-MIT
 
-[npm-url]: https://npmjs.org/package/grunt-font-store
-[npm-version-img]: http://img.shields.io/npm/v/grunt-font-store.svg?style=flat-square
-[npm-downloads-img]: http://img.shields.io/npm/dm/grunt-font-store.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/grunt-font-base64
+[npm-version-img]: http://img.shields.io/npm/v/grunt-font-base64.svg?style=flat-square
+[npm-downloads-img]: http://img.shields.io/npm/dm/grunt-font-base64.svg?style=flat-square
