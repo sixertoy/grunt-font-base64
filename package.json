@@ -32,9 +32,8 @@
   "homepage": "https://github.com/sixertoy/grunt-font-base64",
   "dependencies": {
     "cssparser": "^0.2.2",
-    "fontoptim": "^0.1.0",
+    "fs-extra": "^0.20.1",
     "lodash": "^3.9.3",
-    "q": "^1.4.1",
     "request": "^2.58.0"
   },
   "devDependencies": {

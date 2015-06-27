@@ -1,10 +1,11 @@
-/* jslint indent:4, plusplus: true */
+/*jslint indent:4, plusplus: true */
 /*globals require, module */
 (function () {
 
     'use strict';
 
     var Path = require('path'),
+        grunt = require('grunt'),
         Request = require('request'),
         CSSparser = require('cssparser'),
         parser = new CSSparser.Parser();
@@ -15,11 +16,10 @@
         options: {
             fonts: [],
             errors: false,
-            request: {
-                url: '',
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1944.0 Safari/537.36'
-                }
+            headers: {
+                woffx: 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0', // woff+ woff2
+                woff2: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1944.0 Safari/537.36',
+                ttf: 'Mozilla/5.0 (Macintosh; U; PPC Mac OS X 10_5_2; en-gb) AppleWebKit/526+ (KHTML, like Gecko) Version/3.1 iPhone'
             }
         },
 
@@ -32,13 +32,12 @@
         filename: function (obj) {
             var dcl,
                 result = '',
+                $this = this,
                 splitter = '_';
             if (obj.hasOwnProperty('declarations')) {
                 dcl = obj.declarations;
                 if (dcl.hasOwnProperty('font-family') && dcl.hasOwnProperty('font-style') && dcl.hasOwnProperty('font-weight')) {
-                    result = dcl['font-family'];
-                    // replace simple quote + white space
-                    result = result.replace(/['\s]*/g, '');
+                    result = $this.family(obj);
                     result += splitter + dcl['font-style'];
                     result += splitter + dcl['font-weight'];
                     return result;
@@ -47,6 +46,20 @@
                 }
             } else {
                 return false;
+            }
+        },
+
+        family: function (obj) {
+            var dcl, result;
+            if (obj.hasOwnProperty('declarations')) {
+                dcl = obj.declarations;
+                if (dcl.hasOwnProperty('font-family')) {
+                    result = dcl['font-family'];
+                    result = result.replace(/['\s]*/g, '');
+                    return result;
+                } else {
+                    grunt.log.error('Unable to parse font-family');
+                }
             }
         },
 
@@ -61,7 +74,7 @@
                 dcl = obj.declarations;
                 if (dcl.hasOwnProperty('src')) {
                     result = dcl.src.match(/(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/gi);
-                    return result[0].trim();
+                    return result;
                 } else {
                     return false;
                 }
@@ -117,12 +130,21 @@
          *
          */
         load: function (url, cb) {
-            var json, cssrules, dest, src, filename,
+            var json, cssrules, dest, src, filename, name,
+                index = 0,
                 err = false,
                 $this = this,
-                result = false;
-            this.options.request.url = url;
-            Request(this.options.request, function (err, res, body) {
+                result = false,
+                extensions = ['woffx'],
+                length = extensions.length,
+                requestOptions = {
+                    url: url,
+                    headers: {
+                        'User-Agent': $this.options.headers['woffx']
+                    }
+                };
+
+            Request(requestOptions, function (err, res, body) {
                 if (err || res.statusCode !== 200) {
                     err = 'Unable to load :: ' + url;
                 } else {
@@ -138,8 +160,9 @@
                                 }
                                 result.push({
                                     src: src,
+                                    dest: filename,
                                     data: JSON.stringify(obj),
-                                    dest: filename + Path.extname(src)
+                                    family: $this.family(obj)
                                 });
                             } else {
                                 err = 'Incorrect format :: ' + url;
@@ -158,7 +181,7 @@
          * Lance la tache recuperation des fonts
          *
          */
-        start: function (callback) {
+        init: function (callback) {
             var index = 0,
                 data = false,
                 $this = this,
@@ -176,8 +199,9 @@
                             if (!data.hasOwnProperty(obj.dest)) {
                                 data[obj.dest] = {
                                     src: obj.src,
-                                    body: obj.data
-                                }
+                                    body: obj.data,
+                                    family: obj.family
+                                };
                             }
                         });
                         if (index >= (length - 1)) {

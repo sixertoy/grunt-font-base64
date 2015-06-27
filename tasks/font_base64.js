@@ -25,8 +25,9 @@
         URL = require('url'),
         Path = require('path'),
         Lodash = require('lodash'),
-        fontOptim = require('fontoptim'),
-        Google = require('./services/google'),
+        download = require('./services/download'),
+        optimize = require('./services/optimize'),
+        parseurl = require('./services/parseurl'),
 
         /**
          *
@@ -68,6 +69,12 @@
                     value = Path.join(base, value);
                 }
                 return value;
+            },
+            logErrors: function (grunt, err) {
+                err.forEach(function (msg) {
+                    grunt.log.error(msg);
+                });
+                return this;
             }
         };
     /**
@@ -80,34 +87,27 @@
         // render = null;
         grunt.registerMultiTask('font_base64', 'Generates CSS files with WOFF(2) fonts embedded as Base64', function () {
 
-            var isValidFormat, isValidPath, name,
+            var isValidPath, name,
+                $this = this,
                 promises = [],
                 embedded = '',
                 done = this.async(),
                 cwd = process.cwd(),
                 options = this.options({
-                    format: 'woff', // woff2
-                    dest: Path.join(cwd, 'fonts.css'),
+                    dest: Path.join(cwd, 'build'),
                     debug: (grunt.option('debug') === 1)
                 });
 
             isValidPath = utils.isValidPath(options.dest);
-            isValidFormat = utils.isValidFormat(options.format);
 
             if (!isValidPath) {
                 grunt.log.error('options.dest is not valid');
-
-            } else if (!isValidFormat) {
-                grunt.log.error('options.format is not valid');
 
             } else {
                 // check if is file
                 // dossier de sortie du css
                 options.dest = utils.toAbsolute(options.dest, cwd);
-                // supp du dossier de sortie if exists
-                if (FS.existsSync(options.dest)) {
-                    FS.unlinkSync(options.dest);
-                }
+
                 // filtre sur les URL de la config
                 // matching:
                 // - contains fonts.googleapis.com
@@ -117,19 +117,25 @@
                 this.data.fonts.filter(function (url) {
                     return utils.isValidURL(url);
                 }).map(function (url) {
-                    Google.add(url);
+                    parseurl.add(url);
                 });
 
-                Google.start(function (err, data) {
+                parseurl.init(function (err, data) {
                     if (err) {
-                        err.forEach(function (msg) {
-                            grunt.log.error(msg);
-                        });
+                        utils.logErrors(grunt, err);
                     }
                     if (data) {
-                        console.log(data);
+                        name = Path.join(options.dest, 'fonts');
+                        download.init(data, name, function (err, data) {
+                            if (err) {
+                                utils.logErrors(grunt, err);
+                            }
+                            if(data){
+                                name = Path.join(options.dest, 'styles');
+                                optimize.init(data, name, done);
+                            }
+                        });
                     }
-                    done();
                 });
             }
         });
