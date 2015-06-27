@@ -11,14 +11,23 @@ npm i grunt-font-base64 --save-dev
 ```
 
 ## Usage
-```bash
-options:{
-    format: 'woff'
-}
-files: []
-```
 
-## Options
+### Config
+```json
+    options: {
+        dest: './build'
+    },
+    all: {
+        fonts: ['Gruntfile.js', 'http://fonts.googleapis.com/css?family=Droid+Sans:700', 'http://fonts.googleapis.com/css?family=Droid+Sans', 'http://fonts.googleapis.com/css?family=Open+Sans', 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700']
+    }
+```
+***Droid Sans*** will not be duplicated<br/>
+***Gruntfile.js*** will not fail and not be encoding of course...<br/>
+
+### Command Line
+```bash
+grunt font_base64 --debug
+```
 
 ## Issues
 

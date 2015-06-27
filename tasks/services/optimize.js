@@ -7,12 +7,20 @@
     var FS = require('fs'),
         Path = require('path'),
         FSE = require('fs-extra'),
-        fontOptim = require('fontoptim');
+        Lodash = require('lodash');
 
     module.exports = {
 
+        template: '@font-face{font-family:"<%=family%>";src:url(<%=uri%>) format("<%=format%>");font-weight:<%=weight%>;font-style:<%=style%>}',
+
+        optimize: function(){
+
+        },
+
         init: function (families, dest) {
+            /*
             var base, fonts, css, output,
+                $this = this,
                 keys = Object.keys(families);
 
             FSE.emptyDirSync(dest);
@@ -23,7 +31,7 @@
                     base = Path.basename(file);
                     fonts[base] = FS.readFileSync(file);
                 });
-                css = fontOptim(fonts, {
+                css = $this.optimize(fonts, {
                     fontFamily: family
                 });
                 Object.keys(css).forEach(function (prop) {
@@ -32,6 +40,7 @@
                     FSE.writeFileSync(output, css[prop]);
                 });
             });
+            */
         }
 
     };
@@ -52,12 +61,7 @@ function FontOptim(fonts, options) {
 FontOptim.prototype = {
     defaults: {
         fontFaceTemplate: [
-   '@font-face{',
-    'font-family:"<%=family%>";',
-    'src:url(<%=uri%>) format("<%=format%>");',
-    'font-weight:<%=weight%>;',
-    'font-style:<%=style%>',
-   '}'
+   '
   ].join(''),
         fontUriTemplate: 'data:application/font-<%=format%>;charset=utf-8;base64,<%=base64%>',
         banner: '\n'
