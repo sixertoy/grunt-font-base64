@@ -1,6 +1,6 @@
 /**
- * grunt-font-store
- * https://github.com/sixertoy/grunt-font-store
+ * grunt-font-base64
+ * https://github.com/sixertoy/grunt-font-base64
  *
  * Copyright (c) 2015 sixertoy
  * Licensed under the MIT license.
@@ -12,10 +12,5 @@ module.exports = function (grunt) {
     'use strict';
     // load configs
     require('load-grunt-config')(grunt);
-    /*
-     *
-     * grunt banner
-     * {data: { banner: grunt.file.read('./grunt/banner.tpl', 'utf-8')}}
-     *
-     */
+    grunt.loadTasks('tasks');
 };

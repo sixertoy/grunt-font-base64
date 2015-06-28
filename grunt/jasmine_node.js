@@ -1,22 +1,18 @@
-/*jslint indent: 4 */
-/*global module */
+/**
+ *
+ * Config for grunt-jasmine-node
+ *
+ */
+/*jslint indent:4 */
+/*globals module */
 module.exports = {
     options: {
         match: '.',
-        coverage: {},
-        matchAll: false,
+        verbose: true,
+        matchall: false,
         forceExit: true,
         extensions: 'js',
-        showColors: true,
-        specFolders: ['tests'],
-        specNameMatcher: 'spec',
-        captureExceptions: true,
-        junitreport: {
-            report: false,
-            consolidate: true,
-            useDotNotation: true,
-            savePath: './build/reports/jasmine/'
-        }
+        specNameMatcher: 'spec'
     },
-    src: ['app/**/*.js']
+    all: ['spec/']
 };

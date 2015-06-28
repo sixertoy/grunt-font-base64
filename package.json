@@ -1,50 +1,46 @@
 {
-    "name": "grunt-font-store",
+    "name": "grunt-font-base64",
     "version": "0.1.0",
-    "description": "A Grunt task based on https://github.com/CrocoDillon/font-store",
+    "description": "Generates CSS files with WOFF(2) google fonts embedded as Base64",
     "main": "index.js",
     "scripts": {
-        "clean": "rm -rf node_modules",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "echo \"Error: no start specified\" && exit 1",
-        "git-init": "git init && cd .git/hooks && ln -s ../../bin/git/commit-msg.js && mv commit-msg.js commit-msg && cd ../../"
+        "git-init": "",
+        "clean_modules": "rm -rf node_modules",
+        "test": "istanbul cover ./bin/jasmine_node spec/src",
+        "start": "echo \"Error: no start specified\" && exit 1"
     },
     "engines": {
         "node": ">=0.12.0"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/sixertoy/grunt-font-store"
+        "url": "https://github.com/sixertoy/grunt-font-base64"
     },
-    "keywords": [
-        "grunt"
-    ],
+    "keywords": ["grunt", "google", "font", "base64", "stylesheet", "css"],
     "author": [{
         "name": "sixertoy",
         "email": "sixertoy.github@gmail.com"
     }],
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/sixertoy/grunt-font-store/issues"
+        "url": "https://github.com/sixertoy/grunt-font-base64/issues"
     },
-    "homepage": "https://github.com/sixertoy/grunt-font-store",
+    "homepage": "https://github.com/sixertoy/grunt-font-base64",
     "dependencies": {
-        "class-extend": "",
-        "lodash": "",
-        "object-assign": ""
+        "cssparser": "^0.2.2",
+        "fs-extra": "^0.20.1",
+        "lodash": "^3.9.3",
+        "request": "^2.58.0"
     },
     "devDependencies": {
-        "grunt": "",
-        "grunt-bump": "",
-        "grunt-contrib-connect": "",
-        "grunt-contrib-jshint": "",
-        "grunt-contrib-watch": "",
-        "grunt-coveralls": "",
-        "grunt-jasmine-node-coverage": "",
-        "grunt-jsbeautifier": "",
-        "grunt-markdown": "",
-        "grunt-wrap": "",
-        "load-grunt-config": "",
-        "sinon": ""
+        "grunt": "~0.4.5",
+        "grunt-bump": "^0.3.1",
+        "grunt-contrib-jshint": "^0.11.2",
+        "grunt-contrib-watch": "^0.6.1",
+        "grunt-jasmine-node": "^0.3.1",
+        "istanbul": "^0.3.16",
+        "jasmine-node": "^1.14.5",
+        "load-grunt-config": "^0.17.1",
+        "sinon": "^1.15.3"
     }
 }

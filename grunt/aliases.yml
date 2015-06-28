@@ -1,12 +1,7 @@
 tests:
-  - jasmine_node
-build:
-  - wrap
-  - jsbeautifier
-compile:
-  - tests
-  - build
   - jshint
+  - jasmine_node
 default:
-  - compile
-  - watch
+  - jshint
+  - jasmine_node
+  - font_base64
