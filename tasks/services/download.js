@@ -80,7 +80,7 @@
 
             // create destination directory
             // FSE.emptyDirSync(base);
-            FSE.mkdirpSync(base);
+            FSE.ensureDirSync(base);
 
             // download files
             keys.forEach(function (filename) {

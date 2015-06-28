@@ -73,7 +73,7 @@
 
             // supp le repertoire de destination
             // FSE.emptyDirSync(dest);
-            FSE.mkdirpSync(dest);
+            FSE.ensureDirSync(dest);
 
 
             keys.forEach(function (family) {
