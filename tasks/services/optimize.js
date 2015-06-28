@@ -72,7 +72,9 @@
                 keys = Object.keys(families);
 
             // supp le repertoire de destination
-            FSE.emptyDirSync(dest);
+            // FSE.emptyDirSync(dest);
+            FSE.mkdirpSync(dest);
+
 
             keys.forEach(function (family) {
                 files = families[family];
