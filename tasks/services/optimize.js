@@ -64,7 +64,7 @@
             callback(result);
         },
 
-        init: function (families, dest) {
+        init: function (families, dest, callback) {
 
             var files, file, content, compiled,
                 parsed = {},
@@ -92,6 +92,7 @@
                     FS.writeFileSync(file, content);
                 });
             });
+            callback();
         }
 
     };
