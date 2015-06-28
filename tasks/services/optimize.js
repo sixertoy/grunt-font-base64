@@ -14,8 +14,8 @@
 
         template: '@font-face{font-family:"<%=family%>";src:url(data:application/font-<%=format%>;charset=utf-8;base64,<%=base64%>) format("<%=format%>");font-weight:<%=weight%>;font-style:<%=style%>}',
 
-        optimize: function(file){
-            var buffer = FS.readFileSync(file)
+        optimize: function (file) {
+            var buffer = FS.readFileSync(file);
             return buffer.toString('base64');
         },
 
@@ -53,9 +53,9 @@
             var file, types,
                 result = {},
                 families = Object.keys(parsed);
-            families.forEach(function(fk){
+            families.forEach(function (fk) {
                 types = Object.keys(parsed[fk]);
-                types.forEach(function(tk){
+                types.forEach(function (tk) {
                     file = fk + '.' + tk + '.css';
                     file = Path.join(dest, file);
                     result[file] = parsed[fk][tk];
@@ -81,12 +81,12 @@
                 });
             });
             compiled = Lodash.template($this.template);
-            this.stylesheets(parsed, dest, function(stylesheets){
+            this.stylesheets(parsed, dest, function (stylesheets) {
                 keys = Object.keys(stylesheets);
-                keys.forEach(function(fk){
+                keys.forEach(function (fk) {
                     file = fk;
                     content = '';
-                    stylesheets[fk].forEach(function(obj){
+                    stylesheets[fk].forEach(function (obj) {
                         content += compiled(obj);
                     });
                     FS.writeFileSync(file, content);

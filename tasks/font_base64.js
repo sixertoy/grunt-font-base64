@@ -130,7 +130,7 @@
                             if (err) {
                                 utils.logErrors(grunt, err);
                             }
-                            if(data){
+                            if (data) {
                                 name = Path.join(options.dest, 'styles');
                                 optimize.init(data, name, done);
                             }

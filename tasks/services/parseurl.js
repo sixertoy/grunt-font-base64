@@ -6,7 +6,7 @@
 
     var Path = require('path'),
         grunt = require('grunt'),
-        Request = require('request'),
+        request = require('request'),
         CSSparser = require('cssparser'),
         parser = new CSSparser.Parser();
 
@@ -140,11 +140,11 @@
                 requestOptions = {
                     url: url,
                     headers: {
-                        'User-Agent': $this.options.headers['woffx']
+                        'User-Agent': $this.options.headers.woffx
                     }
                 };
 
-            Request(requestOptions, function (err, res, body) {
+            request(requestOptions, function (err, res, body) {
                 if (err || res.statusCode !== 200) {
                     err = 'Unable to load :: ' + url;
                 } else {
