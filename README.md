@@ -2,7 +2,7 @@
 
 [![MIT License][license-img]][license-url] [![NPM version][npm-version-img]][npm-url] [![NPM downloads][npm-downloads-img]][npm-url] [![Build][travis-img]][travis-url]
 
-* A Grunt task based on fontoptim
+* Generates CSS files with WOFF(2) google fonts embedded as Base64
 
 ## Install
 
@@ -15,7 +15,7 @@ npm i grunt-font-base64 --save-dev
 > **Read the issues before use**
 
 ### Config
-```json
+```javascript
     options: {},
     all: {
         fonts: ['Gruntfile.js', 'http://fonts.googleapis.com/css?family=Droid+Sans:700', 'http://fonts.googleapis.com/css?family=Droid+Sans', 'http://fonts.googleapis.com/css?family=Open+Sans', 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700']
