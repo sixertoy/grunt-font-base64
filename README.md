@@ -12,11 +12,11 @@ npm i grunt-font-base64 --save-dev
 
 ## Usage
 
+> **Read the issues before use**
+
 ### Config
 ```json
-    options: {
-        dest: './build'
-    },
+    options: {},
     all: {
         fonts: ['Gruntfile.js', 'http://fonts.googleapis.com/css?family=Droid+Sans:700', 'http://fonts.googleapis.com/css?family=Droid+Sans', 'http://fonts.googleapis.com/css?family=Open+Sans', 'http://fonts.googleapis.com/css?family=Droid+Sans:400,700']
     }
@@ -30,6 +30,12 @@ grunt font_base64 --debug
 ```
 
 ## Issues
+
+- Not tested
+- woff and woff2 format only
+- Ouput folder is not setted via Gruntfile
+- Output folder is completely deleted (./build/fonts, ./build/styles)
+- @TODO Downloaded fonts must be in a font-family sub folder
 
 [grunt-img]: https://cdn.gruntjs.com/builtwith.png
 [license-img]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square

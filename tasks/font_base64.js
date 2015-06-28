@@ -1,6 +1,5 @@
 /**
  *
- *
  * grunt-font-base64
  * https://github.com/malas/grunt-font-base64
  *
