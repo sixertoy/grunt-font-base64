@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.3
+
+- fix done async callback
+- remove folder clean, use grunt-contrib-clean instead
+
 ## v0.1.0
 
 - Not tested

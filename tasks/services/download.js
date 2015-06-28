@@ -79,7 +79,9 @@
                 length = keys.length;
 
             // create destination directory
-            FSE.emptyDirSync(base);
+            // FSE.emptyDirSync(base);
+            FSE.mkdirpSync(base);
+
             // download files
             keys.forEach(function (filename) {
                 file = Path.join(base, filename);
