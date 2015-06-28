@@ -12,37 +12,7 @@
 
     module.exports = {
 
-        options: {
-            dest: false,
-            base64: false
-        },
-
-        /*
-         *
-
-  function downloadFont (source, destination, done) {
-
-    grunt.log.write('Downloading ' + destination + '... ');
-
-    var parts = destination.split('/');
-    parts.pop();
-    var destFolder = parts.join('/');
-    mkdirp.sync(destFolder);
-
-    var file = fs.createWriteStream(destination);
-    var remote = request(source);
-
-    remote.on('data', function (chunk) {
-      file.write(chunk);
-    });
-
-    remote.on('end', function () {
-      grunt.log.ok();
-      file.end();
-      done();
-    });
-  }
-         */
+        options: {},
 
         downloadFont: function (url, filename, callback) {
             var writer, extension,
@@ -56,7 +26,6 @@
                 grunt.log.debug('request on response');
                 if (res.statusCode === 200) {
                     grunt.log.debug('content-type: ' + res.headers['content-type']);
-                    // console.log(files[index]);
                     file = filename + Path.extname(url);
                     stream = FS.createWriteStream(file);
                 } else {

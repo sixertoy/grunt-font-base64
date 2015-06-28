@@ -94,6 +94,7 @@
                 done = this.async(),
                 cwd = process.cwd(),
                 options = this.options({
+                    flatten: false,
                     dest: Path.join(cwd, 'build'),
                     debug: (grunt.option('debug') === 1)
                 });
