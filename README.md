@@ -16,6 +16,7 @@ npm i grunt-font-base64 --save-dev
 
 ### Config
 ```javascript
+font_base64: {
     options: {},
     all: {
         fonts: [
@@ -27,6 +28,7 @@ npm i grunt-font-base64 --save-dev
             'http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
         ]
     }
+}
 ```
 ***Droid Sans*** will not be duplicated<br/>
 ***Gruntfile.js*** will not fail and not be encoding of course...<br/>
