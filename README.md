@@ -17,7 +17,9 @@ npm i grunt-font-base64 --save-dev
 ### Config
 ```javascript
 font_base64: {
-    options: {},
+    options: {
+        dest: './src/html/fonts' // generate styles and fonts folder
+    },
     all: {
         fonts: [
             'Gruntfile.js',
